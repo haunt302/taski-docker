@@ -166,7 +166,12 @@ jobs:
           # которые нужно выполнить на сервере, 
           # с которым установлено соединение
           script: |
+            mkdir -p taski
             cd taski
+            # Create .env for docker-compose.production.yml
+            cat > .env << 'EOF'
+            DEBUG=0
+            EOF
             # Выполняет pull образов с Docker Hub
             sudo docker compose -f docker-compose.production.yml pull
             # Перезапускает все контейнеры в Docker Compose
